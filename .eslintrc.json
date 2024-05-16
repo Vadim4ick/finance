@@ -1,3 +1,27 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["fsd-vf"],
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "fsd-vf/path-checker": ["error", { "alias": "@" }],
+
+    "fsd-vf/layer-imports": [
+      "error",
+      {
+        "alias": "@",
+        "ignoreImportPatterns": ["**/StoreProvider", "**/testing"]
+      }
+    ],
+
+    "fsd-vf/public-api-imports": [
+      "error",
+      {
+        "alias": "@",
+        "testFilesPatterns": [
+          "**/*.test.*",
+          "**/*.story.*",
+          "**/StoreDecorator.tsx"
+        ]
+      }
+    ]
+  }
 }
