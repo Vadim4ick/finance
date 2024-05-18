@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply flex items-center gap-2 rounded-md px-4 py-2 text-white transition disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400;
+  }
+}
+
+@layer utilities {
+  .inp-primary {
+    @apply h-[30px] rounded-md border border-gray-400/40 px-[12px] py-[6px] text-[12px] outline-none placeholder:text-black/50;
+  }
+
+  .btn-red {
+    @apply bg-rose-900 hover:bg-rose-800;
+  }
+
+  .btn-green {
+    @apply bg-green-600 hover:bg-green-800;
+  }
+}

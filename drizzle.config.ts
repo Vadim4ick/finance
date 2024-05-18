@@ -6,7 +6,7 @@ config({ path: ".env" });
 
 export default defineConfig({
   dialect: "postgresql",
-  schema: "./src/db/schema.ts",
+  schema: "./src/app/db/schema.ts",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
