@@ -1,12 +1,14 @@
 "use client";
 
-import { useProfile } from "@/shared/hooks/useProfile";
+import { useProfile } from "@/entities/Profile";
 import { ReactNode } from "react";
 
 const ProfileLayout = ({ children }: { children: ReactNode }) => {
-  const { data } = useProfile();
+  const { isLoading } = useProfile();
 
-  console.log(data);
+  if (isLoading) {
+    return <div>load...</div>;
+  }
 
   return <>{children}</>;
 };

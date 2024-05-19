@@ -20,4 +20,8 @@
   .btn-green {
     @apply bg-green-600 hover:bg-green-800;
   }
+
+  .nav-item {
+    @apply inline-flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-none bg-transparent  px-3 text-sm font-normal text-white outline-none transition  hover:bg-white/20 hover:text-white focus:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-transparent focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 lg:w-auto;
+  }
 }

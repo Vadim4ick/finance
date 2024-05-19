@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 "use client";
 
-import { Input } from "@/shared/ui/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -17,6 +16,7 @@ import {
 } from "@/entities/AuthForm";
 import { useUnit } from "effector-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Input } from "@/shared/custom-ui/Input";
 
 const AuthForm = memo(() => {
   const currentType = useUnit($currentAuthForm);

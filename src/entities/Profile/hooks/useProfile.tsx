@@ -1,15 +1,21 @@
 "use client";
 
+import { $api } from "@/shared/api/api";
 import { useQuery } from "@tanstack/react-query";
-import { $api } from "../api/api";
+import { setProfile } from "../context";
 
 const useProfile = () => {
   return useQuery({
     queryFn: async () => {
       const res = await $api.get("/users/login-check");
 
+      if (res.data.user) {
+        setProfile(res.data.user);
+      }
+
       return res.data;
     },
+
     queryKey: ["profile"],
 
     // onSuccess() {

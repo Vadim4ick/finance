@@ -1,5 +1,5 @@
 import { $currentAuthForm, toggleType } from "@/entities/AuthForm";
-import { Button } from "@/shared/ui/Button";
+import { Button } from "@/shared/custom-ui/Button";
 import { cn } from "@/shared/utils/index.utils";
 import { useUnit } from "effector-react";
 import { useState } from "react";
