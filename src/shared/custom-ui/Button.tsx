@@ -1,7 +1,7 @@
 import { ReactNode, ButtonHTMLAttributes } from "react";
 import { cn } from "../utils/index.utils";
 
-export type UiButtonVariant = "green" | "red" | "clear";
+export type UiButtonVariant = "green" | "red" | "reset";
 
 type ButtonProps = {
   children: ReactNode;
@@ -19,7 +19,8 @@ export const Button = (props: ButtonProps) => {
         {
           green: "btn btn-green",
           red: "btn btn-red",
-          clear: "",
+          reset:
+            "flex items-center px-4 py-2 text-gray-700 transition-colors hover:bg-accent",
         }[variant],
       )}
     >
