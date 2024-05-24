@@ -13,6 +13,18 @@ export const getDbAndReqBody = async <T>(req?: Request) => {
   return { db };
 };
 
+export const getAuthRouteData = async <T>(req: Request, withReqBody = true) => {
+  const { reqBody, db } = await getDbAndReqBody<T>(
+    withReqBody ? req : undefined,
+  );
+
+  const token = req.headers.get("authorization")?.split(" ")[1];
+
+  const validatedTokenResult = await isValidAccessToken(token);
+
+  return { db, reqBody, validatedTokenResult, token };
+};
+
 export const NextApiError = ({
   error,
   status,
@@ -41,7 +53,7 @@ export const generateTokens = (id: string, email: string) => {
     { id, email },
     process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY as string,
     {
-      expiresIn: "1min",
+      expiresIn: "5min",
     },
   );
 

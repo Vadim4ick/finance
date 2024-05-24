@@ -1,6 +1,6 @@
 "use client";
 
-import { columnsAccount, dataAccounts } from "@/entities/TableColumns";
+import { columnsAccount, useGetAccounts } from "@/entities/TableColumns";
 import {
   SortingState,
   getCoreRowModel,
@@ -14,9 +14,15 @@ import { useState } from "react";
 export const useTableAccounts = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
+  const { data } = useGetAccounts();
+
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, //initial page index
+    pageSize: 3, //default page size
+  });
 
   return useReactTable({
-    data: dataAccounts,
+    data: data?.accounts || [],
     columns: columnsAccount,
     onSortingChange: setSorting,
     // onColumnFiltersChange: setColumnFilters,
@@ -26,10 +32,12 @@ export const useTableAccounts = () => {
     getFilteredRowModel: getFilteredRowModel(),
     // onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       //   columnFilters,
       //   columnVisibility,
+      pagination,
       rowSelection,
     },
   });

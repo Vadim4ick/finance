@@ -29,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       <label>
         <p
           className={cn(
-            "cursor-pointer pb-1 text-[12px] text-black/80",
+            "cursor-pointer pb-2 text-[14px] font-bold text-black/80",
             error && "text-rose-400",
           )}
         >

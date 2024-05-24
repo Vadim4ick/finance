@@ -6,3 +6,9 @@ export const user = pgTable("user", {
   email: text("email").notNull(),
   password: text("password").notNull(),
 });
+
+export const accounts = pgTable("accounts", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  userId: text("user_id").notNull(),
+});
