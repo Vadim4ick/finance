@@ -10,6 +10,7 @@ export const user = pgTable("user", {
 
 export const userRelations = relations(user, ({ many }) => ({
   accounts: many(accounts),
+  categories: many(categories),
 }));
 
 export const accounts = pgTable("accounts", {
@@ -25,32 +26,16 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
   }),
 }));
 
-// categories: many(categories),
-// export const categories = pgTable("categories", {
-//   id: text("id").primaryKey(),
-//   categoryId: text("category_id"),
-//   name: text("name").notNull(),
-//   userId: text("user_id").notNull(),
-// });
+export const categories = pgTable("categories", {
+  id: text("id").primaryKey(),
+  categoryId: text("category_id"),
+  name: text("name").notNull(),
+  userId: text("user_id").notNull(),
+});
 
-// ====
-// export const users = pgTable("users", {
-//   id: text("id").primaryKey(),
-//   username: text("name").notNull(),
-//   email: text("email").notNull(),
-//   password: text("password").notNull(),
-// });
-// export const usersRelations = relations(users, ({ many }) => ({
-//   accounts: many(accounts),
-// }));
-// export const accounts = pgTable("accounts", {
-//   id: text("id").primaryKey(),
-//   name: text("name").notNull(),
-//   userId: text("user_id").notNull(),
-// });
-// export const accountsRelations = relations(accounts, ({ one }) => ({
-//   author: one(users, {
-//     fields: [accounts.userId],
-//     references: [users.id],
-//   }),
-// }));
+export const categoriesRelations = relations(categories, ({ one }) => ({
+  user: one(user, {
+    fields: [categories.userId],
+    references: [user.id],
+  }),
+}));

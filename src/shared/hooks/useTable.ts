@@ -1,4 +1,7 @@
+"use client";
+
 import {
+  ColumnDef,
   SortingState,
   getCoreRowModel,
   getFilteredRowModel,
@@ -7,22 +10,25 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { useGetAccounts } from "./useGetAccounts";
-import { columnsAccount } from "../columns/model/account";
 
-const useTableAccount = () => {
+const useTable = <T>({
+  columns,
+  data,
+}: {
+  columns: ColumnDef<T>[];
+  data?: T[];
+}) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
-  const { data } = useGetAccounts();
 
   const [pagination, setPagination] = useState({
     pageIndex: 0, //initial page index
     pageSize: 3, //default page size
   });
 
-  return useReactTable({
-    data: data?.accounts || [],
-    columns: columnsAccount,
+  const table = useReactTable({
+    data: data || [],
+    columns: columns,
     onSortingChange: setSorting,
     // onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -40,6 +46,11 @@ const useTableAccount = () => {
       rowSelection,
     },
   });
+
+  const currentPage = table.getState().pagination.pageIndex + 1;
+  const pageCount = table.getPageCount();
+
+  return { table, currentPage, pageCount };
 };
 
-export { useTableAccount };
+export { useTable };

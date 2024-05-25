@@ -1,36 +1,32 @@
-import { Table } from "@/shared/ui/table";
-import { TableHeaderAccounts } from "./TableHeaderAccounts";
-import { TableBodyAccounts } from "./TableBodyAccounts";
+import { Table, TableBody, TableCell, TableRow } from "@/shared/ui/table";
 import { Input } from "@/shared/custom-ui/Input";
 import { Button } from "@/shared/custom-ui/Button";
-import {
-  Account,
-  columnsAccount,
-  openCreateAccountModal,
-  useDeleteAccount,
-  useGetAccounts,
-  useTableAccount,
-} from "@/entities/TableColumns";
 import { Loader2, Trash } from "lucide-react";
-import { Row } from "@tanstack/react-table";
+import { Row, flexRender } from "@tanstack/react-table";
+import {
+  Category,
+  columnsCategory,
+  openCreateCategoryModal,
+  useDeleteCategories,
+  useGetCategories,
+} from "@/entities/TableColumns";
+import { TableHeaderCategories } from "./TableHeaderCategories";
 import { useTable } from "@/shared/hooks/useTable";
+import { TableBodyCategories } from "./TableBodyCategories";
 
-const TableAccounts = () => {
-  const { isLoading, data } = useGetAccounts();
+const TableCategories = () => {
+  const { isLoading, data } = useGetCategories();
 
-  // const table = useTableAccount();
+  // const table = useTableCategory();
 
-  const { table } = useTable<Account>({
-    columns: columnsAccount,
-    data: data?.accounts,
+  const { currentPage, pageCount, table } = useTable<Category>({
+    columns: columnsCategory,
+    data: data?.categories,
   });
 
-  const mutateDelete = useDeleteAccount();
+  const mutateDelete = useDeleteCategories();
 
-  const currentPage = table.getState().pagination.pageIndex + 1;
-  const pageCount = table.getPageCount();
-
-  const onDelete = (row: Row<Account>[]) => {
+  const onDelete = (row: Row<Category>[]) => {
     const ids = row.map((item) => item.original.id);
 
     mutateDelete.mutate(ids, {
@@ -55,9 +51,9 @@ const TableAccounts = () => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Счета</h2>
+        <h2 className="text-xl font-semibold">Категории</h2>
 
-        <Button variant="black" onClick={() => openCreateAccountModal()}>
+        <Button variant="black" onClick={() => openCreateCategoryModal()}>
           Добавить новую
         </Button>
       </div>
@@ -88,8 +84,8 @@ const TableAccounts = () => {
 
         <div className="rounded-md border">
           <Table>
-            <TableHeaderAccounts table={table} />
-            <TableBodyAccounts table={table} />
+            <TableHeaderCategories table={table} />
+            <TableBodyCategories table={table} />
           </Table>
         </div>
 
@@ -128,4 +124,4 @@ const TableAccounts = () => {
   );
 };
 
-export { TableAccounts };
+export { TableCategories };

@@ -2,6 +2,7 @@
   "plugins": ["fsd-vf"],
   "extends": ["next/core-web-vitals"],
   "rules": {
+    "react/display-name": "off",
     "fsd-vf/path-checker": ["error", { "alias": "@" }],
 
     "fsd-vf/layer-imports": [
