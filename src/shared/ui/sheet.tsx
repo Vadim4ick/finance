@@ -131,6 +131,34 @@ const SheetDescription = React.forwardRef<
 ));
 SheetDescription.displayName = SheetPrimitive.Description.displayName;
 
+interface ModalSheet {
+  children: React.ReactNode;
+
+  title?: string;
+  description?: string;
+
+  open: boolean;
+  closeFn?: VoidFunction;
+}
+
+const ModalSheet = (props: ModalSheet) => {
+  const { children, description, title, open, closeFn } = props;
+
+  return (
+    <Sheet open={open} onOpenChange={closeFn}>
+      <SheetContent className="space-y-4">
+        <SheetHeader>
+          {title && <SheetTitle>{title}</SheetTitle>}
+
+          <SheetDescription>{description}</SheetDescription>
+        </SheetHeader>
+
+        {children}
+      </SheetContent>
+    </Sheet>
+  );
+};
+
 export {
   Sheet,
   SheetPortal,
@@ -142,4 +170,5 @@ export {
   SheetFooter,
   SheetTitle,
   SheetDescription,
+  ModalSheet,
 };

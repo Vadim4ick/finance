@@ -2,13 +2,8 @@ import { Checkbox } from "@/shared/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { Account } from "../types/account";
 import { Button } from "@/shared/custom-ui/Button";
-import { ArrowUpDown, Edit, MoreHorizontal, Trash } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
+import { ArrowUpDown } from "lucide-react";
+import { Actions } from "./actions";
 
 export const columnsAccount: ColumnDef<Account>[] = [
   {
@@ -53,29 +48,9 @@ export const columnsAccount: ColumnDef<Account>[] = [
     enableHiding: false,
 
     cell: ({ row }) => {
-      const payment = row.original;
+      const id = row.original.id;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button variant="reset" className="size-8 w-full">
-              <MoreHorizontal className="size-4" />
-            </Button>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent align="start" className="border-none bg-white">
-            <DropdownMenuItem className="cursor-pointer">
-              <Edit className="mr-2 size-4" />
-              Edit
-            </DropdownMenuItem>
-
-            <DropdownMenuItem className="cursor-pointer">
-              <Trash className="mr-2 size-4" />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <Actions id={id} />;
     },
   },
 ];

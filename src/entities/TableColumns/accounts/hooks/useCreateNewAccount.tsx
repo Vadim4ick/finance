@@ -1,7 +1,7 @@
-import { closeAccountModal } from "./../../../context/index";
 import { $api } from "@/shared/api/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { closeCreateAccountModal } from "../context";
 
 const useCreateNewAccount = () => {
   const queryClient = useQueryClient();
@@ -17,7 +17,7 @@ const useCreateNewAccount = () => {
 
     onSuccess(data) {
       toast.success(`Счет ${data.data.name} был успешно добавлен!`);
-      closeAccountModal();
+      closeCreateAccountModal();
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
     },
 

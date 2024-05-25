@@ -2,7 +2,7 @@
 
 import { $api } from "@/shared/api/api";
 import { useQuery } from "@tanstack/react-query";
-import { Account } from "../types/account";
+import { Account } from "../columns/types/account";
 
 const useGetAccounts = () => {
   return useQuery({
@@ -13,15 +13,6 @@ const useGetAccounts = () => {
 
       return res.data;
     },
-
-    // onSuccess() {
-    //   toast.success("Вы успешно зарегестрировались!");
-    //   toggleType();
-    // },
-
-    // onError(message: any) {
-    //   toast.success(message.response.data.warningMessage);
-    // },
   });
 };
 

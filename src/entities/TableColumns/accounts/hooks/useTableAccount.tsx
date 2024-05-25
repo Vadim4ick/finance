@@ -1,6 +1,3 @@
-"use client";
-
-import { columnsAccount, useGetAccounts } from "@/entities/TableColumns";
 import {
   SortingState,
   getCoreRowModel,
@@ -10,8 +7,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
+import { useGetAccounts } from "./useGetAccounts";
+import { columnsAccount } from "../columns/model/account";
 
-export const useTableAccounts = () => {
+const useTableAccount = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
   const { data } = useGetAccounts();
@@ -42,3 +41,5 @@ export const useTableAccounts = () => {
     },
   });
 };
+
+export { useTableAccount };

@@ -9,10 +9,11 @@ const useDeleteAccount = () => {
     mutationFn: async (ids: string[]) => {
       const res = await $api.delete(`/accounts/delete/${ids}`);
 
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       return res.data;
     },
 
-    onSuccess(data) {
+    onSuccess() {
       toast.success(`Успешное удаление`);
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
     },

@@ -21,7 +21,7 @@ const TableBodyAccounts = ({ table }: { table: Table<Account> }) => {
             colSpan={columnsAccount.length}
             className="h-24 text-center"
           >
-            No results.
+            Нет счетов.
           </TableCell>
         </TableRow>
       )}
