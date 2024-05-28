@@ -9,7 +9,6 @@ import {
   openCreateAccountModal,
   useDeleteAccount,
   useGetAccounts,
-  useTableAccount,
 } from "@/entities/TableColumns";
 import { Loader2, Trash } from "lucide-react";
 import { Row } from "@tanstack/react-table";
@@ -20,15 +19,12 @@ const TableAccounts = () => {
 
   // const table = useTableAccount();
 
-  const { table } = useTable<Account>({
+  const { table, currentPage, pageCount } = useTable<Account>({
     columns: columnsAccount,
     data: data?.accounts,
   });
 
   const mutateDelete = useDeleteAccount();
-
-  const currentPage = table.getState().pagination.pageIndex + 1;
-  const pageCount = table.getPageCount();
 
   const onDelete = (row: Row<Account>[]) => {
     const ids = row.map((item) => item.original.id);

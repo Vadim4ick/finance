@@ -9,7 +9,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const useTable = <T>({
   columns,
@@ -26,9 +26,12 @@ const useTable = <T>({
     pageSize: 3, //default page size
   });
 
+  const memoizedColumns = useMemo(() => columns, [columns]);
+  const memoizedData = useMemo(() => data ?? [], [data]);
+
   const table = useReactTable({
-    data: data || [],
-    columns: columns,
+    data: memoizedData,
+    columns: memoizedColumns,
     onSortingChange: setSorting,
     // onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),

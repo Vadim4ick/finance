@@ -1,8 +1,8 @@
-import { Table, TableBody, TableCell, TableRow } from "@/shared/ui/table";
+import { Table } from "@/shared/ui/table";
 import { Input } from "@/shared/custom-ui/Input";
 import { Button } from "@/shared/custom-ui/Button";
 import { Loader2, Trash } from "lucide-react";
-import { Row, flexRender } from "@tanstack/react-table";
+import { Row } from "@tanstack/react-table";
 import {
   Category,
   columnsCategory,

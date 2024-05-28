@@ -35,10 +35,10 @@ export { useEditCategories } from "./categories/hooks/useEditCategories";
 export { useGetCategories } from "./categories/hooks/useGetCategories";
 
 export {
-  $modalCreateCategory,
-  closeCreateCategoryModal,
-  openCreateCategoryModal,
-} from "./categories/context";
+  $modalCreateTransaction,
+  closeCreateTransactionModal,
+  openCreateTransactionModal,
+} from "./transactions/context";
 
 export {
   $modalEditCategory,
@@ -55,3 +55,35 @@ export {
 export type { Category } from "./categories/columns/types/category";
 export { columnsCategory } from "./categories/columns/model/category";
 // /Categories
+
+// Transactions
+export { columnsTransaction } from "./transactions/columns/model/transaction";
+export type {
+  Transaction,
+  BodyTransaction,
+} from "./transactions/columns/types/index";
+
+export { useCreateBulkTransactions } from "./transactions/hooks/useCreateBulkTransactions";
+export { useSelectAccount } from "./transactions/hooks/useSelectAccount";
+export { useCreateNewTransaction } from "./transactions/hooks/useCreateNewTransaction";
+export { useGetTransactions } from "./transactions/hooks/useGetTransactions";
+export { useDeleteTransactions } from "./transactions/hooks/useDeleteTransactions";
+
+export {
+  $modalCreateCategory,
+  closeCreateCategoryModal,
+  openCreateCategoryModal,
+} from "./categories/context";
+
+export {
+  $modalEditTransaction,
+  closeEditTransactionModal,
+  openEditTransactionModal,
+} from "./transactions/context";
+
+export {
+  $modalEditTransactionId,
+  deleteEditTransactionModalId,
+  setEditTransactionModalId,
+} from "./transactions/context";
+// /Transactions

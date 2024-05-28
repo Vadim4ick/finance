@@ -5,14 +5,14 @@ import { ActionButtons } from "./../../../ui/ActionButtons";
 
 const Actions = ({ id }: { id: string }) => {
   const mutateDelete = useDeleteCategories();
-  const { isPending: isPendingDelete } = useEditCategories();
+  const { isPending: isPendingEdit } = useEditCategories();
 
   const onClickEdit = () => {
     setEditCategoryModalId(id);
     openEditCategoryModal();
   };
 
-  const isLoading = mutateDelete.isPending || isPendingDelete;
+  const isLoading = mutateDelete.isPending || isPendingEdit;
 
   const onDelete = () => {
     mutateDelete.mutate([id]);

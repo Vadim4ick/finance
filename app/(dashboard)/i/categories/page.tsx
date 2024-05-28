@@ -1,7 +1,7 @@
 import { CategoriesPage } from "@/views/CategoriesPage";
 
-const CategoriyPage = () => {
+const Page = () => {
   return <CategoriesPage />;
 };
 
-export default CategoriyPage;
+export default Page;

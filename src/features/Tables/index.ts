@@ -9,3 +9,8 @@ export { EditCategoryModal } from "./categories/modal/EditCategoryModal";
 export { NewCategoryModal } from "./categories/modal/NewCategoryModal";
 export { TableCategories } from "./categories/ui/TableCategories";
 // /Categories
+
+// Transactions
+export { TableTransactions } from "./transactions/ui/TableTransactions";
+export { NewTransactionModal } from "./transactions/modal/NewTransactionModal";
+// /Transactions
