@@ -1,8 +1,7 @@
-import { Transaction } from "@/entities/TableColumns";
 import { TableHead, TableHeader, TableRow } from "@/shared/ui/table";
 import { Table, flexRender } from "@tanstack/react-table";
 
-const TableHeaderTransactions = ({ table }: { table: Table<Transaction> }) => {
+const HeaderTable = <T,>({ table }: { table: Table<T> }) => {
   return (
     <TableHeader>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -25,4 +24,4 @@ const TableHeaderTransactions = ({ table }: { table: Table<Transaction> }) => {
   );
 };
 
-export { TableHeaderTransactions };
+export { HeaderTable };

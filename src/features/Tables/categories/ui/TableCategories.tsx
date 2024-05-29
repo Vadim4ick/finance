@@ -10,14 +10,17 @@ import {
   useDeleteCategories,
   useGetCategories,
 } from "@/entities/TableColumns";
-import { TableHeaderCategories } from "./TableHeaderCategories";
 import { useTable } from "@/shared/hooks/useTable";
-import { TableBodyCategories } from "./TableBodyCategories";
 
-const TableCategories = () => {
+interface Props {
+  Header: ITableHeader;
+  Body: ITableBody;
+}
+
+const TableCategories = (props: Props) => {
+  const { Header, Body } = props;
+
   const { isLoading, data } = useGetCategories();
-
-  // const table = useTableCategory();
 
   const { currentPage, pageCount, table } = useTable<Category>({
     columns: columnsCategory,
@@ -84,8 +87,13 @@ const TableCategories = () => {
 
         <div className="rounded-md border">
           <Table>
-            <TableHeaderCategories table={table} />
-            <TableBodyCategories table={table} />
+            <Header<Category> table={table} />
+
+            <Body<Category>
+              table={table}
+              nullTitle="нет категорий."
+              columns={columnsCategory}
+            />
           </Table>
         </div>
 

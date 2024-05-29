@@ -11,15 +11,20 @@ import {
 } from "@/entities/TableColumns";
 import { useTable } from "@/shared/hooks/useTable";
 import { Loader2, Trash } from "lucide-react";
-import { TableHeaderTransactions } from "./TableHeaderTransactions";
 import { Input } from "@/shared/custom-ui/Input";
-import { TableBodyTransactions } from "./TableBodyTransactions";
 import { Row } from "@tanstack/react-table";
 import { UploadButton } from "./UploadButton";
 import { Button as ButtonUI } from "@/shared/ui/button";
 import { Button } from "@/shared/custom-ui/Button";
 
-const TableTransactions = () => {
+interface Props {
+  Header: ITableHeader;
+  Body: ITableBody;
+}
+
+const TableTransactions = (props: Props) => {
+  const { Header, Body } = props;
+
   const { data, isLoading } = useGetTransactions();
 
   const { currentPage, pageCount, table } = useTable<Transaction>({
@@ -96,8 +101,13 @@ const TableTransactions = () => {
 
         <div className="rounded-md border">
           <Table>
-            <TableHeaderTransactions table={table} />
-            <TableBodyTransactions table={table} />
+            <Header<Transaction> table={table} />
+
+            <Body<Transaction>
+              table={table}
+              nullTitle="нет транзакций."
+              columns={columnsTransaction}
+            />
           </Table>
         </div>
 

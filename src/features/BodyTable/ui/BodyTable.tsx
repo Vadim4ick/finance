@@ -1,8 +1,15 @@
 import { TableBody, TableCell, TableRow } from "@/shared/ui/table";
-import { Table, flexRender } from "@tanstack/react-table";
-import { Account, columnsAccount } from "@/entities/TableColumns";
+import { ColumnDef, Table, flexRender } from "@tanstack/react-table";
 
-const TableBodyAccounts = ({ table }: { table: Table<Account> }) => {
+const BodyTable = <T,>({
+  table,
+  nullTitle,
+  columns,
+}: {
+  table: Table<T>;
+  nullTitle: string;
+  columns: ColumnDef<T>[];
+}) => {
   return (
     <TableBody>
       {table.getRowModel().rows?.length ? (
@@ -17,16 +24,15 @@ const TableBodyAccounts = ({ table }: { table: Table<Account> }) => {
         ))
       ) : (
         <TableRow>
-          <TableCell
-            colSpan={columnsAccount.length}
-            className="h-24 text-center"
-          >
-            Нет счетов.
-          </TableCell>
+          {nullTitle && (
+            <TableCell colSpan={columns.length} className="h-24 text-center">
+              {nullTitle}
+            </TableCell>
+          )}
         </TableRow>
       )}
     </TableBody>
   );
 };
 
-export { TableBodyAccounts };
+export { BodyTable };

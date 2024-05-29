@@ -1,6 +1,4 @@
 import { Table } from "@/shared/ui/table";
-import { TableHeaderAccounts } from "./TableHeaderAccounts";
-import { TableBodyAccounts } from "./TableBodyAccounts";
 import { Input } from "@/shared/custom-ui/Input";
 import { Button } from "@/shared/custom-ui/Button";
 import {
@@ -14,10 +12,15 @@ import { Loader2, Trash } from "lucide-react";
 import { Row } from "@tanstack/react-table";
 import { useTable } from "@/shared/hooks/useTable";
 
-const TableAccounts = () => {
-  const { isLoading, data } = useGetAccounts();
+interface Props {
+  Header: ITableHeader;
+  Body: ITableBody;
+}
 
-  // const table = useTableAccount();
+const TableAccounts = (props: Props) => {
+  const { Header, Body } = props;
+
+  const { isLoading, data } = useGetAccounts();
 
   const { table, currentPage, pageCount } = useTable<Account>({
     columns: columnsAccount,
@@ -84,8 +87,13 @@ const TableAccounts = () => {
 
         <div className="rounded-md border">
           <Table>
-            <TableHeaderAccounts table={table} />
-            <TableBodyAccounts table={table} />
+            <Header<Account> table={table} />
+
+            <Body<Account>
+              table={table}
+              nullTitle="нет счетов."
+              columns={columnsAccount}
+            />
           </Table>
         </div>
 
