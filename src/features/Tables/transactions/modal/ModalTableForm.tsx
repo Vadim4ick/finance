@@ -17,8 +17,8 @@ export const formTableModal = z.object({
   amount: z.number({ message: "Должна быть указана сумма" }),
   date: z.date({ message: "Нужно обязательно выбрать дату" }),
   accountId: z.string({ message: "Обязательно выбери счет!" }),
-  categoryId: z.string().optional(),
-  notes: z.string().optional(),
+  categoryId: z.string().nullable(),
+  notes: z.string().nullable(),
 });
 
 export type FormTableModalSchema = z.infer<typeof formTableModal>;
@@ -43,7 +43,6 @@ const ModalTableForm = (props: Props) => {
     resolver: zodResolver(formTableModal),
     defaultValues: dataById && {
       ...dataById,
-      notes: dataById.notes ?? "",
       date: new Date(dataById.date),
     },
   });
@@ -136,6 +135,7 @@ const ModalTableForm = (props: Props) => {
 
             <Textarea
               {...field}
+              value={field.value || ""}
               className="w-full"
               placeholder="Необязательные примечания"
               disabled={disabled}
@@ -182,7 +182,7 @@ const ModalTableForm = (props: Props) => {
             </p>
 
             <DataSelect
-              value={field.value || ""}
+              value={field.value ?? ""}
               onChange={field.onChange}
               disabled={disabled}
               data={dataCategories}

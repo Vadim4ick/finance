@@ -10,7 +10,7 @@ const useGetTransactions = () => {
 
     queryFn: async () => {
       const res = await $api.get<{ transactions: Transaction[] }>(
-        "/transactions/getAll",
+        "/transactions/get",
       );
 
       return res.data;

@@ -1,14 +1,14 @@
 export type Transaction = {
   id: string;
-  category?: string | null;
   // name: string;
   date: Date;
   payee: string;
   amount: number;
-  account?: string | null;
+  notes: string | null;
   accountId: string;
-  notes?: string;
-  categoryId?: string;
+  categoryId: string | null;
+  account?: string | null;
+  category?: string | null;
 };
 
 export interface BodyTransaction extends Omit<Transaction, "id"> {}

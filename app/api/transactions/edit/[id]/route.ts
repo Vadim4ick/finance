@@ -1,15 +1,11 @@
-import {
-  accounts as accountsSchema,
-  categories as categoriesSchema,
-  transactions as transactionsSchema,
-} from "@/app/db/schema";
+import { transactions as transactionsSchema } from "@/app/db/schema";
 import { BodyTransaction } from "@/entities/TableColumns";
 import {
   NextApiError,
   getAuthRouteData,
   parseJwt,
 } from "@/shared/utils/api.utils";
-import { and, eq, inArray, sql } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req: Request, params: { params: { id: string } }) {
@@ -49,11 +45,8 @@ export async function PATCH(req: Request, params: { params: { id: string } }) {
   const data = await db
     .update(transactionsSchema)
     .set({
-      payee: reqBody.body.payee,
-      amount: reqBody.body.amount,
+      ...reqBody.body,
       date: new Date(reqBody.body.date),
-      accountId: reqBody.body.accountId,
-      notes: null,
     })
     .where(
       and(

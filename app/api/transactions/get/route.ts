@@ -3,15 +3,11 @@ import {
   transactions as transactionsSchema,
   categories as categoriesSchema,
 } from "@/app/db/schema";
-import {
-  NextApiError,
-  getAuthRouteData,
-  parseJwt,
-} from "@/shared/utils/api.utils";
-import { and, eq } from "drizzle-orm";
+import { getAuthRouteData, parseJwt } from "@/shared/utils/api.utils";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, params: { params: { id: string } }) {
+export async function GET(req: Request) {
   const { db, token, validatedTokenResult } = await getAuthRouteData<{
     body: { name: string };
   }>(req, false);
@@ -29,16 +25,7 @@ export async function GET(req: Request, params: { params: { id: string } }) {
 
   const userId = (await parseJwt(token as string)) as { id: string };
 
-  const id = params.params.id;
-
-  if (!id) {
-    return NextApiError({
-      error: "Введите id!",
-      status: 400,
-    });
-  }
-
-  const [transaction] = await db
+  const transactions = await db
     .select({
       id: transactionsSchema.id,
       amount: transactionsSchema.amount,
@@ -46,6 +33,7 @@ export async function GET(req: Request, params: { params: { id: string } }) {
       notes: transactionsSchema.notes,
       date: transactionsSchema.date,
       accountId: transactionsSchema.accountId,
+      categoryId: transactionsSchema.categoryId,
       account: accountsSchema.name,
       category: categoriesSchema.name,
     })
@@ -58,12 +46,7 @@ export async function GET(req: Request, params: { params: { id: string } }) {
       categoriesSchema,
       eq(transactionsSchema.categoryId, categoriesSchema.id),
     )
-    .where(
-      and(
-        eq(transactionsSchema.userId, userId.id),
-        eq(transactionsSchema.id, id),
-      ),
-    );
+    .where(eq(transactionsSchema.userId, userId.id));
 
-  return NextResponse.json({ transaction: transaction });
+  return NextResponse.json({ transactions: transactions });
 }

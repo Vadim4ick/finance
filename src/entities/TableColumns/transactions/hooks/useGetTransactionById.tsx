@@ -10,7 +10,7 @@ const useGetTransactionById = (id: string) => {
 
     queryFn: async () => {
       const res = await $api.get<{ transaction: Transaction }>(
-        `/transactions/getById/${id}`,
+        `/transactions/get/${id}`,
       );
 
       return res.data;
