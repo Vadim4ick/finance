@@ -70,6 +70,8 @@ export { useSelectAccount } from "./transactions/hooks/useSelectAccount";
 export { useCreateNewTransaction } from "./transactions/hooks/useCreateNewTransaction";
 export { useGetTransactions } from "./transactions/hooks/useGetTransactions";
 export { useDeleteTransactions } from "./transactions/hooks/useDeleteTransactions";
+export { useGetTransactionById } from "./transactions/hooks/useGetTransactionById";
+export { useEditTransaction } from "./transactions/hooks/useEditTransaction";
 
 export {
   $importResults,
@@ -101,5 +103,4 @@ export {
   setVariantFormDefault,
   setVariantFormImport,
 } from "./transactions/context";
-
 // /Transactions

@@ -48,14 +48,29 @@ const TableLayout = <T,>(props: Props<T>) => {
 
       <div className="w-full">
         <div className="flex items-center justify-between py-4">
-          <Input
-            placeholder="Filter name..."
-            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("name")?.setFilterValue(event.target.value)
-            }
-            className="w-80 max-w-sm"
-          />
+          {Upload ? (
+            <Input
+              placeholder="Filter date..."
+              value={
+                (table.getColumn("date")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("date")?.setFilterValue(event.target.value)
+              }
+              className="w-80 max-w-sm"
+            />
+          ) : (
+            <Input
+              placeholder="Filter name..."
+              value={
+                (table.getColumn("name")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("name")?.setFilterValue(event.target.value)
+              }
+              className="w-80 max-w-sm"
+            />
+          )}
 
           {table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button
@@ -76,7 +91,7 @@ const TableLayout = <T,>(props: Props<T>) => {
 
             <Body<T>
               table={table}
-              nullTitle="нет категорий."
+              nullTitle="Список пуст."
               columns={columnsCategory}
             />
           </Table>

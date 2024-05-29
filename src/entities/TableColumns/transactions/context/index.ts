@@ -1,6 +1,7 @@
 "use client";
 
 import { createDomain } from "effector";
+import { Transaction } from "../columns/types";
 
 export enum Variants {
   DEFAULT = "DEFAULT",

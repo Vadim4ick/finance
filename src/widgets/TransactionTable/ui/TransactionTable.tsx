@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  $modalEditTransactionId,
   $variant,
   Variants,
   useCreateBulkTransactions,
@@ -10,15 +11,18 @@ import {
 import { BodyTable } from "@/features/BodyTable";
 import { HeaderTable } from "@/features/HeaderTable";
 import {
+  EditTransactionModal,
   NewTransactionModal,
   TableImportFormTransaction,
+  TableLoading,
   TableTransactions,
 } from "@/features/Tables";
 import { useUnit } from "effector-react";
-import { Loader2 } from "lucide-react";
 
 const TransactionTable = () => {
   const variant = useUnit($variant);
+
+  const [modalId] = useUnit([$modalEditTransactionId]);
 
   const { data: dataAccounts, isLoading: isLoadingAccounts } = useGetAccounts();
   const { data: dataCategories, isLoading: isLoadingCategories } =
@@ -29,15 +33,7 @@ const TransactionTable = () => {
   const { isPending } = useCreateBulkTransactions();
 
   if (isPending) {
-    return (
-      <>
-        <div className="h-[450px] w-full">
-          <div className="flex h-full w-full items-center justify-center">
-            <Loader2 className="size-5 animate-spin" />
-          </div>
-        </div>
-      </>
-    );
+    return <TableLoading />;
   }
 
   if (Variants.IMPORT === variant) {
@@ -57,6 +53,15 @@ const TransactionTable = () => {
         dataCategories={dataCategories?.categories}
         disabled={disabled}
       />
+
+      {modalId && (
+        <EditTransactionModal
+          dataAccounts={dataAccounts?.accounts}
+          dataCategories={dataCategories?.categories}
+          disabled={disabled}
+          id={modalId}
+        />
+      )}
     </div>
   );
 };

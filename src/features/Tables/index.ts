@@ -1,3 +1,7 @@
+export { EditTransactionModal } from "./transactions/modal/EditTransactionModal";
+
+export { TableLoading } from "./TableLoading";
+
 // Accounts
 export { EditAccountModal } from "./accounts/modal/EditAccountModal";
 export { NewAccountModal } from "./accounts/modal/NewAccountModal";
@@ -18,4 +22,5 @@ export { TableImportFormTransaction } from "./transactions/ui/TableImportFormTra
 export { options } from "./transactions/ui/TableImport";
 
 export { TableImport } from "./transactions/ui/TableImport";
+
 // /Transactions
