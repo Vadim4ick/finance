@@ -12,3 +12,10 @@ export const formatErrors = <T>(errors: T) => {
   });
   return errorMessage.trim();
 };
+
+export const formatPrice = (number: number) => {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "RUB",
+  }).format(number);
+};

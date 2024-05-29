@@ -13,4 +13,9 @@ export { TableCategories } from "./categories/ui/TableCategories";
 // Transactions
 export { TableTransactions } from "./transactions/ui/TableTransactions";
 export { NewTransactionModal } from "./transactions/modal/NewTransactionModal";
+export { TableImportFormTransaction } from "./transactions/ui/TableImportFormTransaction";
+
+export { options } from "./transactions/ui/TableImport";
+
+export { TableImport } from "./transactions/ui/TableImport";
 // /Transactions

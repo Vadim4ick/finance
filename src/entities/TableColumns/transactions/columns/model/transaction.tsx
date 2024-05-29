@@ -4,6 +4,8 @@ import { Button } from "@/shared/custom-ui/Button";
 import { ArrowUpDown } from "lucide-react";
 import { Transaction } from "../types";
 import { Actions } from "./actions";
+import { Badge } from "@/shared/ui/badge";
+import { formatPrice } from "@/shared/utils/index.utils";
 
 export const columnsTransaction: ColumnDef<Transaction>[] = [
   {
@@ -100,10 +102,15 @@ export const columnsTransaction: ColumnDef<Transaction>[] = [
     },
 
     cell({ row }) {
-      const amount = row.original.amount;
+      const amount = parseFloat(row.getValue("amount"));
 
       return (
-        <span className="px-3.5 py-2.5 text-xs font-medium">{amount}</span>
+        <Badge
+          className="px-3.5 py-2.5 text-xs font-medium"
+          variant={amount < 0 ? "destructive" : "primary"}
+        >
+          {formatPrice(amount)}
+        </Badge>
       );
     },
   },

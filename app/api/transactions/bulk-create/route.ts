@@ -33,23 +33,6 @@ export async function POST(req: Request) {
 
   const userId = (await parseJwt(token as string)) as { id: string };
 
-  //   const [data] = await db
-  //     .insert(transactionsSchema)
-  //     .values({
-  //       id: createId(),
-  //       ...reqBody.body,
-  //       date: new Date(reqBody.body.date),
-  //       userId: userId.id,
-  //     })
-  //     .returning();
-
-  //   const newArray = reqBody.body.map((value) => ({
-  //     id: createId(),
-  //     ...value,
-  //     accountId: "f5l1ml98f0n1fsnh496cg16q",
-  //     userId: userId.id,
-  //   }));
-
   const data = await db
     .insert(transactionsSchema)
     .values(
@@ -57,13 +40,10 @@ export async function POST(req: Request) {
         id: createId(),
         ...value,
         date: new Date(value.date),
-        accountId: "f5l1ml98f0n1fsnh496cg16q",
         userId: userId.id,
       })),
     )
     .returning();
-
-  //   console.log("data", newArray);
 
   return NextResponse.json({ data: data });
 }

@@ -13,22 +13,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
-import { SelectedColumnsState } from "./TableTransactions";
 import clsx from "clsx";
 
+interface SelectedColumnsState {
+  [key: string]: string | null;
+}
+
 interface Props {
-  data: string[][];
   selectedColumns: SelectedColumnsState;
   onChangeSelect: (value: string, columnIdx: number) => void;
+
+  headers: string[];
+  body: string[][];
 }
 
 export const options = ["amount", "payee", "date"];
 
 const TableImport = (props: Props) => {
-  const { data, onChangeSelect, selectedColumns } = props;
-
-  const headers = data[0];
-  const body = data.slice(1);
+  const { headers, body, onChangeSelect, selectedColumns } = props;
 
   return (
     <div className="rounded-md border">

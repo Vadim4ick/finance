@@ -1,12 +1,7 @@
+import { CSVResult } from "@/entities/TableColumns";
 import { Button } from "@/shared/ui/button";
 import { Upload } from "lucide-react";
 import { useCSVReader } from "react-papaparse";
-
-export interface CSVResult {
-  data: any[];
-  errors: any[];
-  meta: {};
-}
 
 const UploadButton = ({
   handleUpload,
