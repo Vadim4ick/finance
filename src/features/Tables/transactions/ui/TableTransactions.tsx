@@ -22,7 +22,7 @@ interface Props {
 const TableTransactions = (props: Props) => {
   const { Header, Body } = props;
 
-  const { data, isLoading } = useGetTransactions();
+  const { data, isLoading } = useGetTransactions({});
 
   const { currentPage, pageCount, table } = useTable<Transaction>({
     columns: columnsTransaction,

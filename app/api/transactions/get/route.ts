@@ -4,7 +4,8 @@ import {
   categories as categoriesSchema,
 } from "@/app/db/schema";
 import { getAuthRouteData, parseJwt } from "@/shared/utils/api.utils";
-import { eq } from "drizzle-orm";
+import { parse, subDays } from "date-fns";
+import { and, desc, eq, gte, lte } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -24,6 +25,16 @@ export async function GET(req: Request) {
   }
 
   const userId = (await parseJwt(token as string)) as { id: string };
+
+  const from = new URL(req.url).searchParams.get("from");
+  const to = new URL(req.url).searchParams.get("to");
+  const accountId = new URL(req.url).searchParams.get("accountId");
+
+  const deafultTo = new Date();
+  const deafultFrom = subDays(deafultTo, 30);
+
+  const startDate = from ? parse(from, "yyyy-MM-dd", new Date()) : deafultFrom;
+  const endDate = to ? parse(to, "yyyy-MM-dd", new Date()) : deafultTo;
 
   const transactions = await db
     .select({
@@ -46,7 +57,15 @@ export async function GET(req: Request) {
       categoriesSchema,
       eq(transactionsSchema.categoryId, categoriesSchema.id),
     )
-    .where(eq(transactionsSchema.userId, userId.id));
+    .where(
+      and(
+        accountId ? eq(transactionsSchema.accountId, accountId) : undefined,
+        eq(accountsSchema.userId, userId.id),
+        gte(transactionsSchema.date, startDate),
+        lte(transactionsSchema.date, endDate),
+      ),
+    )
+    .orderBy(desc(transactionsSchema.date));
 
   return NextResponse.json({ transactions: transactions });
 }
