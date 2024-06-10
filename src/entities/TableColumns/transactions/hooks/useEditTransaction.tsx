@@ -10,7 +10,7 @@ const useEditTransaction = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ body }: { body: BodyTransaction }) => {
+    mutationFn: async ({ body }: { body: Partial<BodyTransaction> }) => {
       const res = await $api.patch(`/transactions/edit/${id}`, {
         body: { ...body },
       });

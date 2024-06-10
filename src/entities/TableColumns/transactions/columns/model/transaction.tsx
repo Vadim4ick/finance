@@ -6,6 +6,7 @@ import { Transaction } from "../types";
 import { Actions } from "./actions";
 import { Badge } from "@/shared/ui/badge";
 import { formatPrice } from "@/shared/utils/index.utils";
+import { Untitled } from "./../../../ui/Untitled";
 
 export const columnsTransaction: ColumnDef<Transaction>[] = [
   {
@@ -68,7 +69,11 @@ export const columnsTransaction: ColumnDef<Transaction>[] = [
     cell({ row }) {
       const category = row.original.category;
 
-      return <span>{category || "Без категории"}</span>;
+      if (!category) {
+        return <Untitled id={row.original.id} />;
+      }
+
+      return <span>{category}</span>;
     },
   },
 

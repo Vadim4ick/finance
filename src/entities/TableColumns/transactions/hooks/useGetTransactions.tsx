@@ -14,7 +14,7 @@ const useGetTransactions = ({
   accountId?: string;
 }) => {
   return useQuery({
-    queryKey: ["transactions" + { from, to, accountId }],
+    queryKey: ["transactions"],
 
     queryFn: async () => {
       const res = await $api.get<{ transactions: Transaction[] }>(

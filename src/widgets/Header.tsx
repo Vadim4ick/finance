@@ -6,9 +6,13 @@ import { Logo } from "@/shared/icons/Logo";
 import { useUnit } from "effector-react";
 import Link from "next/link";
 import { DropdownAvatar } from "@/features/DropdownAvatar";
+import { SortingFilters } from "@/features/SortingFilters";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const profile = useUnit($profile);
+
+  const pathname = usePathname();
 
   return (
     <>
@@ -40,6 +44,8 @@ const Header = () => {
               This is your Financial Overview Report
             </p>
           </div>
+
+          {pathname === "/i" && <SortingFilters />}
         </div>
       </header>
     </>

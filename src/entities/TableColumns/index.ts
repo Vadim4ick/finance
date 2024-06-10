@@ -42,6 +42,8 @@ export {
   openCreateTransactionModal,
 } from "./transactions/context";
 
+export { $listCategoryModal, setListCategoryModal } from "./categories/context";
+
 export {
   $modalEditCategory,
   closeEditCategoryModal,

@@ -4,6 +4,7 @@ import {
   $modalEditTransactionId,
   $variant,
   Variants,
+  setListCategoryModal,
   useCreateBulkTransactions,
   useGetAccounts,
   useGetCategories,
@@ -18,6 +19,7 @@ import {
   TableTransactions,
 } from "@/features/Tables";
 import { useUnit } from "effector-react";
+import { useEffect } from "react";
 
 const TransactionTable = () => {
   const variant = useUnit($variant);
@@ -25,12 +27,21 @@ const TransactionTable = () => {
   const [modalId] = useUnit([$modalEditTransactionId]);
 
   const { data: dataAccounts, isLoading: isLoadingAccounts } = useGetAccounts();
-  const { data: dataCategories, isLoading: isLoadingCategories } =
-    useGetCategories();
+  const {
+    data: dataCategories,
+    isLoading: isLoadingCategories,
+    isSuccess,
+  } = useGetCategories();
 
   const disabled = isLoadingCategories || isLoadingAccounts;
 
   const { isPending } = useCreateBulkTransactions();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setListCategoryModal(dataCategories.categories);
+    }
+  }, [isSuccess]);
 
   if (isPending) {
     return <TableLoading />;

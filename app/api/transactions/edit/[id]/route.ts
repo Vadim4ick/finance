@@ -44,10 +44,14 @@ export async function PATCH(req: Request, params: { params: { id: string } }) {
 
   const data = await db
     .update(transactionsSchema)
-    .set({
-      ...reqBody.body,
-      date: new Date(reqBody.body.date),
-    })
+    .set(
+      reqBody.body.date
+        ? {
+            ...reqBody.body,
+            date: new Date(reqBody.body.date),
+          }
+        : { ...reqBody.body },
+    )
     .where(
       and(
         eq(transactionsSchema.userId, userId.id),
