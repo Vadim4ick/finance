@@ -74,6 +74,7 @@ export { useGetTransactions } from "./transactions/hooks/useGetTransactions";
 export { useDeleteTransactions } from "./transactions/hooks/useDeleteTransactions";
 export { useGetTransactionById } from "./transactions/hooks/useGetTransactionById";
 export { useEditTransaction } from "./transactions/hooks/useEditTransaction";
+export { useGetSummaryTransactions } from "./transactions/hooks/useGetSummaryTransactions";
 
 export {
   $importResults,
