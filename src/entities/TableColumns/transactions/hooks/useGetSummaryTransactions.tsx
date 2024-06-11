@@ -2,7 +2,22 @@
 
 import { $api } from "@/shared/api/api";
 import { useQuery } from "@tanstack/react-query";
-import { Transaction } from "../columns/types";
+import { Category } from "../../categories/columns/types/category";
+
+interface Summary {
+  remainingAmount: number;
+  remainingChange: number;
+  incomeAmount: number;
+  incomeChange: number;
+  expensesAmount: number;
+  expensesChange: number;
+  categories: Category[];
+  days: {
+    date: Date;
+    income: number;
+    expenses: number;
+  }[];
+}
 
 const useGetSummaryTransactions = ({
   from,
@@ -17,7 +32,7 @@ const useGetSummaryTransactions = ({
     queryKey: ["transactions", { from, to, accountId }],
 
     queryFn: async () => {
-      const res = await $api.get<{ transactions: Transaction[] }>(
+      const res = await $api.get<{ data: Summary }>(
         "/transactions/get-summary",
         {
           params: {

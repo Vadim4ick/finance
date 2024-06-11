@@ -117,8 +117,6 @@ export async function GET(req: Request) {
     lastPeriodEnd,
   );
 
-  console.log("lastPeriod", lastPeriod);
-
   const incomeChange = calculatePercentageChange(
     currentPeriod.income,
     lastPeriod.income,
